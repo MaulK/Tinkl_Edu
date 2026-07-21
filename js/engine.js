@@ -183,5 +183,8 @@ function checkWin() {
     }, 1500);
   } else {
     playSound('fail'); showPetMessage("Oops! Let's try again.", 'think');
+    executionTimeout = setTimeout(() => {
+      showModal('Oops!', 'You didn\'t reach the goal. Check your code and try again!', () => resetLevel(), true);
+    }, 1000);
   }
 }

@@ -187,7 +187,7 @@
       </div>
 
       <!-- Code Area -->
-      <div class="w-full lg:w-[400px] flex flex-col gap-4 h-[45%] lg:h-full z-10">
+      <div class="w-full lg:w-[400px] flex flex-col gap-4 h-[45%] lg:h-full z-10 min-h-0">
         <!-- Toolbox -->
         <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 p-4">
           <div class="flex items-center gap-2 mb-3 text-slate-400">
@@ -200,12 +200,12 @@
         </div>
         
         <!-- Workspace -->
-        <div class="flex-grow bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 p-4 flex flex-col relative">
+        <div class="flex-grow min-h-0 bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 p-4 flex flex-col relative">
           <div class="flex justify-between items-center mb-3">
             <h3 class="font-bold text-slate-500 dark:text-slate-400 text-sm uppercase tracking-wider">Your Code</h3>
             <button onclick="clearWorkspace()" class="text-xs text-slate-400 hover:text-red-500 transition-colors bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">Clear All</button>
           </div>
-          <div id="workspace-blocks" class="flex-grow bg-slate-50 dark:bg-slate-900/50 rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-600 p-3 flex flex-col gap-2 overflow-y-auto min-h-[120px]">
+          <div id="workspace-blocks" class="flex-grow min-h-0 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-600 p-3 flex flex-col gap-2 overflow-y-auto">
             <!-- Dropped blocks -->
           </div>
           
@@ -229,7 +229,7 @@
       <div id="modal-icon" class="text-6xl mb-4">🌟</div>
       <h2 id="modal-title" class="font-display text-4xl text-brand-orange mb-2">Awesome!</h2>
       <p id="modal-desc" class="text-slate-600 dark:text-slate-300 mb-8 text-lg">You completed the level.</p>
-      <button onclick="closeModal()" class="bg-brand-teal hover:bg-teal-500 text-white font-display text-2xl py-3 px-8 rounded-2xl w-full shadow-[0_4px_0_0_#0F766E] active:translate-y-1 active:shadow-none transition-all">Continue</button>
+      <button id="modal-btn" onclick="closeModal()" class="bg-brand-teal hover:bg-teal-500 text-white font-display text-2xl py-3 px-8 rounded-2xl w-full shadow-[0_4px_0_0_#0F766E] active:translate-y-1 active:shadow-none transition-all">Continue</button>
     </div>
   </div>
 

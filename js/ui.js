@@ -232,9 +232,20 @@ function initBackground() {
   }
 }
 
-function showModal(title, desc, cb) {
+function showModal(title, desc, cb, isFail = false) {
   document.getElementById('modal-title').innerText = title;
   document.getElementById('modal-desc').innerText = desc;
+  document.getElementById('modal-title').className = `font-display text-4xl mb-2 ${isFail ? 'text-red-500' : 'text-brand-orange'}`;
+  document.getElementById('modal-icon').innerText = isFail ? '🤔' : '🌟';
+  
+  const btn = document.getElementById('modal-btn');
+  if (btn) {
+     btn.innerText = isFail ? 'Try Again' : 'Continue';
+     btn.className = isFail 
+       ? 'bg-slate-500 hover:bg-slate-600 text-white font-display text-2xl py-3 px-8 rounded-2xl w-full shadow-[0_4px_0_0_#334155] active:translate-y-1 active:shadow-none transition-all'
+       : 'bg-brand-teal hover:bg-teal-500 text-white font-display text-2xl py-3 px-8 rounded-2xl w-full shadow-[0_4px_0_0_#0F766E] active:translate-y-1 active:shadow-none transition-all';
+  }
+  
   document.getElementById('modal-overlay').classList.remove('hidden');
   modalCallback = cb;
 }

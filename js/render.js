@@ -26,23 +26,81 @@ function drawGrid(ctx, state, lvl) {
   for(let i=0; i<lvl.size; i++) {
     for(let j=0; j<lvl.size; j++) {
       ctx.fillStyle = (i+j)%2===0 ? '#F8FAFC' : '#F1F5F9';
-      if (lvl.ents.find(e => e.type==='color' && e.color==='red' && e.x===j && e.y===i)) ctx.fillStyle = '#FECACA';
       ctx.fillRect(j*w, i*h, w, h); ctx.strokeRect(j*w, i*h, w, h);
+      
+      const colorEnt = lvl.ents.find(e => e.type==='color' && e.color==='red' && e.x===j && e.y===i);
+      if (colorEnt) {
+         ctx.fillStyle = '#FECACA'; ctx.fillRect(j*w, i*h, w, h); 
+         ctx.fillStyle = '#EF4444';
+         ctx.beginPath(); ctx.roundRect(j*w + w*0.1, i*h + h*0.1, w*0.8, h*0.8, 12); ctx.fill();
+         ctx.fillStyle = '#B91C1C';
+         ctx.beginPath(); ctx.roundRect(j*w + w*0.2, i*h + h*0.2, w*0.6, h*0.6, 8); ctx.fill();
+      }
     }
   }
-  // Goal
-  ctx.fillStyle = '#FFD54F';
+  // Goal Star
+  ctx.fillStyle = '#FEF08A';
+  drawStar(ctx, lvl.goal.x*w + w/2, lvl.goal.y*h + h/2, 5, w*0.4, w*0.2);
+  ctx.fillStyle = '#F59E0B';
   drawStar(ctx, lvl.goal.x*w + w/2, lvl.goal.y*h + h/2, 5, w*0.3, w*0.15);
+  
   // Ents
   lvl.ents.forEach(e => {
     if (e.type==='flower' && !state.collectedFlowers.includes(`${e.x},${e.y}`)) {
-      ctx.fillStyle = '#F472B6'; ctx.beginPath(); ctx.arc(e.x*w+w/2, e.y*h+h/2, w*0.25, 0, Math.PI*2); ctx.fill();
+      const cx = e.x*w+w/2, cy = e.y*h+h/2, r = w*0.35;
+      
+      // Stem
+      ctx.strokeStyle = '#22C55E'; ctx.lineWidth = 4;
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx, cy + r*0.8); ctx.stroke();
+      
+      // Leaves
+      ctx.fillStyle = '#22C55E';
+      ctx.beginPath(); ctx.ellipse(cx - r*0.3, cy + r*0.4, r*0.3, r*0.15, -Math.PI/4, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(cx + r*0.3, cy + r*0.4, r*0.3, r*0.15, Math.PI/4, 0, Math.PI*2); ctx.fill();
+      
+      // Petals
+      ctx.fillStyle = '#F472B6';
+      for(let p=0; p<5; p++) {
+        let angle = (p * Math.PI * 2) / 5;
+        ctx.beginPath(); ctx.arc(cx + Math.cos(angle)*r*0.45, cy + Math.sin(angle)*r*0.45, r*0.4, 0, Math.PI*2); ctx.fill();
+      }
+      
+      // Center
+      ctx.fillStyle = '#FBBF24';
+      ctx.beginPath(); ctx.arc(cx, cy, r*0.3, 0, Math.PI*2); ctx.fill();
     }
   });
+
   // Robot
   const rx = state.visualPos.x, ry = state.visualPos.y;
-  ctx.fillStyle = '#4DB6AC'; ctx.beginPath(); ctx.roundRect(rx*w+w*0.2, ry*h+h*0.2, w*0.6, h*0.6, 10); ctx.fill();
-  ctx.fillStyle = '#1E293B'; ctx.fillRect(rx*w+w*0.35, ry*h+h*0.35, w*0.1, w*0.1); ctx.fillRect(rx*w+w*0.55, ry*h+h*0.35, w*0.1, w*0.1);
+  const rcx = rx*w+w/2, rcy = ry*h+h/2, rw = w*0.6, rh = h*0.6;
+  
+  // Robot Shadow
+  ctx.fillStyle = 'rgba(0,0,0,0.15)';
+  ctx.beginPath(); ctx.ellipse(rcx, rcy + rh*0.5, rw*0.6, rw*0.15, 0, 0, Math.PI*2); ctx.fill();
+  
+  // Antenna
+  ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(rcx, rcy - rh/2); ctx.lineTo(rcx, rcy - rh*0.8); ctx.stroke();
+  ctx.fillStyle = '#EF4444'; ctx.beginPath(); ctx.arc(rcx, rcy - rh*0.8, 4, 0, Math.PI*2); ctx.fill();
+  
+  // Tracks / Wheels
+  ctx.fillStyle = '#334155';
+  ctx.beginPath(); ctx.roundRect(rcx - rw/2 - 4, rcy - rh*0.3, 8, rh*0.8, 4); ctx.fill();
+  ctx.beginPath(); ctx.roundRect(rcx + rw/2 - 4, rcy - rh*0.3, 8, rh*0.8, 4); ctx.fill();
+
+  // Body
+  ctx.fillStyle = '#4DB6AC'; 
+  ctx.beginPath(); ctx.roundRect(rcx - rw/2, rcy - rh/2, rw, rh, 12); ctx.fill();
+  
+  // Screen/Face
+  ctx.fillStyle = '#0F172A';
+  ctx.beginPath(); ctx.roundRect(rcx - rw*0.35, rcy - rh*0.25, rw*0.7, rh*0.5, 6); ctx.fill();
+  
+  // Glowing Eyes
+  ctx.fillStyle = '#38BDF8';
+  ctx.beginPath(); ctx.arc(rcx - rw*0.15, rcy, rw*0.1, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(rcx + rw*0.15, rcy, rw*0.1, 0, Math.PI*2); ctx.fill();
 }
 
 function drawStar(ctx, cx, cy, spikes, outR, inR) {
