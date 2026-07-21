@@ -1,0 +1,22 @@
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+.dark ::-webkit-scrollbar-thumb { background: #475569; }
+
+/* Pet Animations */
+@keyframes pet-idle {
+  0%, 100% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.05) translateY(-5px); }
+}
+@keyframes pet-jump {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-40px) scale(0.9, 1.1); }
+}
+.pet-idle { animation: pet-idle 3s infinite; }
+.pet-jump { animation: pet-jump 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+
+/* Confetti Container */
+#confetti-container { pointer-events: none; }
+
+body { overscroll-behavior: none; }
