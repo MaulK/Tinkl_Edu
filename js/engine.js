@@ -11,7 +11,7 @@ function startLevel(id) {
   tb.innerHTML = '';
   currentLevel.tools.forEach(tid => {
     const def = BLOCKS[tid];
-    tb.innerHTML += `<div class="toolbox-block select-none text-white font-bold py-2 px-3 rounded-xl shadow-[0_4px_0_0_rgba(0,0,0,0.2)] border-b-4 cursor-grab active:cursor-grabbing hover:brightness-110 transition-all ${def.color}" data-id="${tid}">${def.label}</div>`;
+    tb.innerHTML += `<div class="toolbox-block touch-none select-none text-white font-bold py-2 px-3 rounded-xl shadow-[0_4px_0_0_rgba(0,0,0,0.2)] border-b-4 cursor-grab active:cursor-grabbing hover:brightness-110 transition-all ${def.color}" data-id="${tid}">${def.label}</div>`;
   });
   clearWorkspace();
   resetLevel();

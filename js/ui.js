@@ -164,8 +164,13 @@ function initInteraction() {
     dragClone.style.top = (e.clientY - dragClone.offsetHeight/2) + 'px';
   });
 
-  document.addEventListener('pointerup', (e) => {
+  const endDrag = (e, cancel = false) => {
     if (!dragClone) return;
+    if (cancel) {
+      if (currentTarget && currentTarget.classList.contains('workspace-block')) currentTarget.style.opacity = '1';
+      dragClone.remove(); dragClone = null; currentTarget = null;
+      return;
+    }
     const workspace = document.getElementById('workspace-blocks');
     const rect = workspace.getBoundingClientRect();
     const inArea = e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
@@ -183,14 +188,17 @@ function initInteraction() {
       }
     }
     dragClone.remove(); dragClone = null; currentTarget = null;
-  });
+  };
+
+  document.addEventListener('pointerup', (e) => endDrag(e, false));
+  document.addEventListener('pointercancel', (e) => endDrag(e, true));
 }
 
 function addBlock(id) {
   const ws = document.getElementById('workspace-blocks');
   const def = BLOCKS[id];
   const el = document.createElement('div');
-  el.className = `workspace-block select-none text-white font-bold py-3 px-4 rounded-xl shadow-[0_4px_0_0_rgba(0,0,0,0.2)] border-b-4 cursor-pointer hover:brightness-110 transition-all transform scale-0 origin-left ${def.color}`;
+  el.className = `workspace-block touch-none select-none text-white font-bold py-3 px-4 rounded-xl shadow-[0_4px_0_0_rgba(0,0,0,0.2)] border-b-4 cursor-pointer hover:brightness-110 transition-all transform scale-0 origin-left ${def.color}`;
   el.dataset.id = id; el.innerHTML = def.label;
   ws.appendChild(el);
   requestAnimationFrame(() => el.style.transform = 'scale(1)');
