@@ -165,7 +165,7 @@
     </div>
 
     <!-- LEVEL SCREEN -->
-    <div id="level-screen" class="screen hidden absolute inset-0 p-2 md:p-4 flex flex-col lg:flex-row gap-4 h-full">
+    <div id="level-screen" class="screen hidden absolute inset-0 p-2 md:p-4 flex flex-col lg:flex-row gap-4 h-full overflow-y-auto lg:overflow-hidden">
       
       <!-- Header Mobile (Back btn) -->
       <div class="lg:hidden flex items-center justify-between bg-white dark:bg-slate-800 p-3 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
@@ -174,23 +174,23 @@
       </div>
 
       <!-- Puzzle Area -->
-      <div class="flex-1 bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden flex flex-col relative z-10 min-h-0">
+      <div class="flex-none lg:flex-1 bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden flex flex-col relative z-10 min-h-0">
         <div class="hidden lg:flex p-4 bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700 justify-between items-center">
           <button onclick="showScreen('home')" class="text-slate-500 hover:text-brand-orange font-bold transition-colors">← Back to Map</button>
           <h2 class="font-display text-2xl text-brand-teal" id="level-name">Level Name</h2>
           <div class="flex gap-1 text-2xl" id="level-stars-display"></div>
         </div>
         
-        <div class="flex-grow h-0 relative bg-slate-100 dark:bg-slate-900 flex items-center justify-center p-2 sm:p-4 overflow-hidden">
+        <div class="flex-grow h-auto lg:h-0 relative bg-slate-100 dark:bg-slate-900 flex items-center justify-center p-2 sm:p-4 overflow-hidden">
            <canvas id="game-canvas" width="400" height="400" class="rounded-2xl shadow-inner bg-white dark:bg-slate-800 border-4 border-slate-200 dark:border-slate-700"></canvas>
         </div>
       </div>
 
       <!-- Code Area -->
-      <div class="w-full lg:w-[400px] flex flex-col gap-3 lg:gap-4 flex-1 lg:flex-none lg:h-full z-10 min-h-0">
+      <div class="w-full lg:w-[400px] flex flex-col gap-3 lg:gap-4 flex-none lg:h-full z-10 min-h-0">
         <!-- Toolbox -->
-        <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 p-4">
-          <div class="flex items-center gap-2 mb-3 text-slate-400">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 md:p-4">
+          <div class="flex items-center gap-2 mb-2 md:mb-3 text-slate-400">
             <span class="font-bold text-sm uppercase tracking-wider">Blocks</span>
             <span class="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">(Tap to add)</span>
           </div>
@@ -200,17 +200,17 @@
         </div>
         
         <!-- Workspace -->
-        <div class="flex-grow min-h-0 bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 p-4 flex flex-col relative">
-          <div class="flex justify-between items-center mb-3">
+        <div class="flex-grow min-h-0 bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 md:p-4 flex flex-col relative">
+          <div class="flex justify-between items-center mb-2 md:mb-3">
             <h3 class="font-bold text-slate-500 dark:text-slate-400 text-sm uppercase tracking-wider">Your Code</h3>
             <button onclick="clearWorkspace()" class="text-xs text-slate-400 hover:text-red-500 transition-colors bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">Clear All</button>
           </div>
-          <div id="workspace-blocks" class="flex-grow min-h-0 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-600 p-4 pb-24 flex flex-col gap-3 overflow-y-auto">
+          <div id="workspace-blocks" class="flex-grow min-h-0 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-600 p-3 md:p-4 flex flex-col gap-3 overflow-y-auto">
             <!-- Dropped blocks -->
           </div>
           
           <!-- Controls -->
-          <div class="mt-4 flex gap-3 relative z-20">
+          <div class="mt-3 md:mt-4 flex gap-3 relative z-20">
             <button onclick="runCode()" id="run-btn" class="flex-grow bg-brand-teal hover:bg-teal-500 text-white font-display text-2xl py-3 px-4 rounded-2xl shadow-[0_6px_0_0_#0F766E] active:shadow-[0_0px_0_0_#0F766E] active:translate-y-[6px] transition-all flex items-center justify-center gap-2">
               ▶️ RUN
             </button>
