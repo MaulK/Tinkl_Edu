@@ -71,7 +71,16 @@ function toggleDarkMode() { document.documentElement.classList.toggle('dark'); }
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(el => el.classList.add('hidden'));
   document.getElementById(`${id}-screen`).classList.remove('hidden');
-  if (id === 'level') renderMap();
+  if (id === 'home') {
+    renderMap();
+  }
+  if (id === 'level') {
+    // On mobile, scroll level-screen to top so user starts from the canvas
+    const levelScreen = document.getElementById('level-screen');
+    if (levelScreen && window.innerWidth < 1024) {
+      levelScreen.scrollTop = 0;
+    }
+  }
 }
 
 function resetProgress() { document.getElementById('confirm-modal-overlay').classList.remove('hidden'); }

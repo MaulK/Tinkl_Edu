@@ -165,56 +165,56 @@
     </div>
 
     <!-- LEVEL SCREEN -->
-    <div id="level-screen" class="screen hidden absolute inset-0 p-2 md:p-4 flex flex-col lg:flex-row gap-4 h-full overflow-y-auto lg:overflow-hidden">
+    <div id="level-screen" class="screen hidden absolute inset-0 p-2 md:p-4 flex flex-col lg:flex-row gap-2 lg:gap-4 h-full overflow-y-auto lg:overflow-hidden">
       
       <!-- Header Mobile (Back btn) -->
-      <div class="lg:hidden flex items-center justify-between bg-white dark:bg-slate-800 p-3 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
-        <button onclick="showScreen('home')" class="text-slate-500 font-bold px-3 py-1 bg-slate-100 dark:bg-slate-700 rounded-lg">← Map</button>
-        <span class="font-display text-brand-teal font-bold truncate px-2" id="mobile-level-name">Level</span>
+      <div class="lg:hidden flex-shrink-0 flex items-center justify-between bg-white dark:bg-slate-800 p-2 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+        <button onclick="showScreen('home')" class="text-slate-500 font-bold px-3 py-1 bg-slate-100 dark:bg-slate-700 rounded-lg text-sm">← Map</button>
+        <span class="font-display text-brand-teal font-bold truncate px-2 text-sm" id="mobile-level-name">Level</span>
       </div>
 
       <!-- Puzzle Area -->
-      <div class="flex-none lg:flex-1 bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden flex flex-col relative z-10 min-h-0">
+      <div class="canvas-area flex-shrink lg:flex-shrink-0 lg:flex-1 bg-white dark:bg-slate-800 rounded-2xl lg:rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden flex flex-col relative z-10 min-h-0">
         <div class="hidden lg:flex p-4 bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700 justify-between items-center">
           <button onclick="showScreen('home')" class="text-slate-500 hover:text-brand-orange font-bold transition-colors">← Back to Map</button>
           <h2 class="font-display text-2xl text-brand-teal" id="level-name">Level Name</h2>
           <div class="flex gap-1 text-2xl" id="level-stars-display"></div>
         </div>
         
-        <div class="flex-grow h-auto lg:h-0 relative bg-slate-100 dark:bg-slate-900 flex items-center justify-center p-2 sm:p-4 overflow-hidden">
+        <div class="flex-grow h-auto lg:h-0 relative bg-slate-100 dark:bg-slate-900 flex items-center justify-center p-2 overflow-hidden">
            <canvas id="game-canvas" width="400" height="400" class="rounded-2xl shadow-inner bg-white dark:bg-slate-800 border-4 border-slate-200 dark:border-slate-700"></canvas>
         </div>
       </div>
 
       <!-- Code Area -->
-      <div class="w-full lg:w-[400px] flex flex-col gap-3 lg:gap-4 flex-none lg:h-full z-10 min-h-0">
+      <div class="code-panel w-full lg:w-[400px] flex flex-col gap-2 lg:gap-4 flex-shrink-0 lg:h-full z-10 min-h-0">
         <!-- Toolbox -->
-        <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 md:p-4">
-          <div class="flex items-center gap-2 mb-2 md:mb-3 text-slate-400">
-            <span class="font-bold text-sm uppercase tracking-wider">Blocks</span>
-            <span class="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">(Tap to add)</span>
+        <div class="bg-white dark:bg-slate-800 rounded-2xl lg:rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 p-2 md:p-4">
+          <div class="flex items-center gap-2 mb-1 md:mb-3 text-slate-400">
+            <span class="font-bold text-xs lg:text-sm uppercase tracking-wider">Blocks</span>
+            <span class="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-0.5 lg:py-1 rounded">(Tap to add)</span>
           </div>
-          <div class="flex flex-wrap gap-2 max-h-32 lg:max-h-64 overflow-y-auto p-1" id="toolbox">
+          <div class="flex flex-wrap gap-1.5 lg:gap-2 max-h-20 lg:max-h-64 overflow-y-auto p-1" id="toolbox">
              <!-- Blocks -->
           </div>
         </div>
         
         <!-- Workspace -->
-        <div class="flex-grow min-h-0 bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 md:p-4 flex flex-col relative">
-          <div class="flex justify-between items-center mb-2 md:mb-3">
-            <h3 class="font-bold text-slate-500 dark:text-slate-400 text-sm uppercase tracking-wider">Your Code</h3>
-            <button onclick="clearWorkspace()" class="text-xs text-slate-400 hover:text-red-500 transition-colors bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">Clear All</button>
+        <div class="flex-grow min-h-[120px] lg:min-h-0 bg-white dark:bg-slate-800 rounded-2xl lg:rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 p-2 md:p-4 flex flex-col relative">
+          <div class="flex justify-between items-center mb-1 md:mb-3">
+            <h3 class="font-bold text-slate-500 dark:text-slate-400 text-xs lg:text-sm uppercase tracking-wider">Your Code</h3>
+            <button onclick="clearWorkspace()" class="text-xs text-slate-400 hover:text-red-500 transition-colors bg-slate-100 dark:bg-slate-700 px-2 py-0.5 lg:py-1 rounded">Clear All</button>
           </div>
-          <div id="workspace-blocks" class="flex-grow min-h-0 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-600 p-3 md:p-4 flex flex-col gap-3 overflow-y-auto">
+          <div id="workspace-blocks" class="flex-grow min-h-[60px] lg:min-h-0 bg-slate-50 dark:bg-slate-900/50 rounded-xl lg:rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-600 p-2 md:p-4 flex flex-col gap-2 lg:gap-3 overflow-y-auto">
             <!-- Dropped blocks -->
           </div>
           
           <!-- Controls -->
-          <div class="mt-3 md:mt-4 flex gap-3 relative z-20">
-            <button onclick="runCode()" id="run-btn" class="flex-grow bg-brand-teal hover:bg-teal-500 text-white font-display text-2xl py-3 px-4 rounded-2xl shadow-[0_6px_0_0_#0F766E] active:shadow-[0_0px_0_0_#0F766E] active:translate-y-[6px] transition-all flex items-center justify-center gap-2">
+          <div class="mt-2 md:mt-4 flex gap-2 lg:gap-3 relative z-20">
+            <button onclick="runCode()" id="run-btn" class="flex-grow bg-brand-teal hover:bg-teal-500 text-white font-display text-xl lg:text-2xl py-2.5 lg:py-3 px-4 rounded-xl lg:rounded-2xl shadow-[0_6px_0_0_#0F766E] active:shadow-[0_0px_0_0_#0F766E] active:translate-y-[6px] transition-all flex items-center justify-center gap-2">
               ▶️ RUN
             </button>
-            <button onclick="resetLevel()" class="bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300 font-bold py-3 px-4 rounded-2xl shadow-[0_6px_0_0_#94A3B8] dark:shadow-[0_6px_0_0_#475569] active:shadow-none active:translate-y-[6px] transition-all" title="Reset Level">
+            <button onclick="resetLevel()" class="bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300 font-bold py-2.5 lg:py-3 px-4 rounded-xl lg:rounded-2xl shadow-[0_6px_0_0_#94A3B8] dark:shadow-[0_6px_0_0_#475569] active:shadow-none active:translate-y-[6px] transition-all" title="Reset Level">
               🔄
             </button>
           </div>
