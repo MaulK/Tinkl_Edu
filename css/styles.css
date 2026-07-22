@@ -20,3 +20,16 @@
 #confetti-container { pointer-events: none; }
 
 body { overscroll-behavior: none; }
+
+/* Layout fixes */
+#game-canvas {
+  height: 100%;
+  width: auto;
+  aspect-ratio: 1 / 1;
+  max-width: 100%;
+  max-height: 500px;
+  display: block;
+}
+
+
+
